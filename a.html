@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planet Green - Modern Web Development</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #22c55e 0%, #059669 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+        }
+
+        
+
+        .button-gradient {
+            background: linear-gradient(135deg, #22c55e 0%, #059669 100%);
+        }
+
+        .logo-shape {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .nav-blur {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-white" x-data="{ mobileMenu: false, scrolled: false }" @scroll.window="scrolled = window.scrollY > 20">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300" :class="{ 'nav-blur bg-white/80 shadow-sm': scrolled }">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="relative w-12 h-12">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-green-500 to-emerald-400 rounded-xl rotate-6 logo-shape"></div>
+                        <div class="absolute inset-0 bg-gradient-to-bl from-green-400 to-emerald-500 rounded-xl -rotate-6 opacity-70"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">PG</span>
+                        </div>
+                    </div>
+                    <span class="text-xl font-bold gradient-text">Planet Green</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#services" class="text-gray-700 hover:text-green-600 font-medium transition-colors">Services</a>
+                    <a href="#tech-stack" class="text-gray-700 hover:text-green-600 font-medium transition-colors">Tech Stack</a>
+                    <a href="#projects" class="text-gray-700 hover:text-green-600 font-medium transition-colors">Projects</a>
+                    <a href="#contact" class="button-gradient text-white px-6 py-2.5 rounded-xl hover:opacity-90 transition-opacity font-medium inline-flex items-center space-x-2">
+                        <span>Start Project</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button @click="mobileMenu = !mobileMenu" class="md:hidden">
+                    <svg x-show="!mobileMenu" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                    </svg>
+                    <svg x-show="mobileMenu" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div x-show="mobileMenu" class="md:hidden" x-transition>
+                <div class="py-4 space-y-4">
+                    <a href="#services" class="block text-gray-700 hover:text-green-600 font-medium">Services</a>
+                    <a href="#tech-stack" class="block text-gray-700 hover:text-green-600 font-medium">Tech Stack</a>
+                    <a href="#projects" class="block text-gray-700 hover:text-green-600 font-medium">Projects</a>
+                    <a href="#contact" class="block button-gradient text-white px-6 py-2.5 rounded-xl text-center">Start Project</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 md:pt-40 md:pb-32 hero-gradient relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('/api/placeholder/1920/1080')] opacity-5"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="inline-flex items-center space-x-2 px-4 py-2 bg-green-100 rounded-full text-green-600 text-sm mb-6 font-medium">
+                        <span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+                        <span>React & Mobile Development Experts</span>
+                    </div>
+                    <h1 class="text-4xl md:text-6xl font-bold text-gray-900 !leading-tight mb-6">
+                        Building Next-Gen
+                        <span class="gradient-text block">Digital Solutions</span>
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8">
+                        Specialized in React, Next.js, React Native, and cutting-edge web technologies. We transform ideas into powerful digital experiences.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact" class="button-gradient text-white px-8 py-4 rounded-xl hover:opacity-90 transition-opacity text-center group">
+                            <span class="inline-flex items-center">
+                                Discuss Your Project
+                                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                                </svg>
+                            </span>
+                        </a>
+                        <a href="#projects" class="bg-white text-gray-900 px-8 py-4 rounded-xl border border-gray-200 hover:border-green-500 transition-colors text-center">
+                            View Case Studies
+                        </a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
+                        <img src="banner.jpg" alt="Modern Development" class="w-full h-96 object-cover"/>
+                        
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-r from-green-500/30 to-emerald-500/30 blur-3xl -z-10 rounded-full transform translate-x-10"></div>
+                </div>
+            </div>
+
+            <!-- Tech Stack Pills -->
+            <div class="mt-20 flex flex-wrap justify-center gap-4">
+                <div class="px-6 py-2 bg-white/80 backdrop-blur border border-gray-200 rounded-full text-gray-700 shadow-sm hover:border-green-500 transition-colors">React</div>
+                <div class="px-6 py-2 bg-white/80 backdrop-blur border border-gray-200 rounded-full text-gray-700 shadow-sm hover:border-green-500 transition-colors">Next.js</div>
+                <div class="px-6 py-2 bg-white/80 backdrop-blur border border-gray-200 rounded-full text-gray-700 shadow-sm hover:border-green-500 transition-colors">TypeScript</div>
+                <div class="px-6 py-2 bg-white/80 backdrop-blur border border-gray-200 rounded-full text-gray-700 shadow-sm hover:border-green-500 transition-colors">React Native</div>
+                <div class="px-6 py-2 bg-white/80 backdrop-blur border border-gray-200 rounded-full text-gray-700 shadow-sm hover:border-green-500 transition-colors">Node.js</div>
+                <div class="px-6 py-2 bg-white/80 backdrop-blur border border-gray-200 rounded-full text-gray-700 shadow-sm hover:border-green-500 transition-colors">GraphQL</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                    <span class="gradient-text">Core Technologies</span>
+                </h2>
+                <p class="text-gray-600 text-lg">
+                    We specialize in modern JavaScript frameworks and mobile development
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="group bg-white p-8 rounded-2xl hover:bg-gradient-to-b hover:from-green-50 hover:to-emerald-50/50 border border-gray-100 shadow-sm transition-all duration-300 hover:shadow-xl">
+                    <div class="w-14 h-14 bg-gradient-to-tr from-green-500 to-emerald-400 rounded-2xl flex items-center justify-center mb-6 text-white transform group-hover:rotate-6 transition-transform">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">React Development</h3>
+                    <p class="text-gray-600 mb-6">Expert React development with modern practices: Hooks, Context, Redux, and advanced state management.</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Custom Hooks Development
+                        </div>
+                        <div class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Performance Optimization
+                        </div>
+                        <div class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Component Architecture
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="group bg-white p-8 rounded-2xl hover:bg-gradient-to-b hover:from-green-50 hover:to-emerald-50/50 border border-gray-100 shadow-sm transition-all duration-300 hover:shadow-xl">
+                    <div class="w-14 h-14 bg-gradient-to-tr from-green-500 to-emerald-400 rounded-2xl flex items-center justify-center mb-6 text-white transform group-hover:rotate-6 transition-transform">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Mobile Development</h3>
+                    <p class="text-gray-600 mb-6">Cross-platform mobile apps with React Native. Native performance with code reusability.</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            iOS & Android Apps
+                        </div>
+                        <div class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Native Modules Integration
+                        </div>
+                        <div class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            App Store Deployment
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="group bg-white p-8 rounded-2xl hover:bg-gradient-to-b hover:from-green-50 hover:to-emerald-50/50 border border-gray-100 shadow-sm transition-all duration-300 hover:shadow-xl">
+                    <div class="w-14 h-14 bg-gradient-to-tr from-green-500 to-emerald-400 rounded-2xl flex items-center justify-center mb-6 text-white transform group-hover:rotate-6 transition-transform">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Next.js Solutions</h3>
+                    <p class="text-gray-600 mb-6">Server-side rendering, static generation, and full-stack Next.js applications.</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            API Development
+                        </div>
+                        <div class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            SSR & SSG
+                        </div>
+                        <div class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Edge Functions
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    <span class="gradient-text">Featured Projects</span>
+                </h2>
+                <p class="text-gray-600 text-lg">Real-world applications built with modern technologies</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 card-hover">
+                    <div class="relative">
+                        <img src="e-commerce.jpg" alt="E-commerce Platform" class="w-full h-64 object-cover"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm">Next.js</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm">TypeScript</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm">Stripe</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-3">E-commerce Platform</h3>
+                        <p class="text-gray-600 mb-4">Full-featured e-commerce platform with real-time inventory, analytics dashboard, and Stripe integration.</p>
+                        <a href="#" class="text-green-600 font-medium hover:text-green-700 inline-flex items-center">
+                            View Case Study
+                            <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 card-hover">
+                    <div class="relative">
+                        <img src="mobile.jpg" alt="Healthcare App" class="w-full h-64 object-cover"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm">React Native</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm">GraphQL</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm">Firebase</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-3">Healthcare Mobile App</h3>
+                        <p class="text-gray-600 mb-4">Cross-platform mobile application for patient management with real-time notifications and secure data handling.</p>
+                        <a href="#" class="text-green-600 font-medium hover:text-green-700 inline-flex items-center">
+                            View Case Study
+                            <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                    <span class="gradient-text">Start Your Project</span>
+                </h2>
+                <p class="text-gray-600 text-lg">Ready to bring your ideas to life? Let's create something amazing together</p>
+            </div>
+            <div class="max-w-xl mx-auto bg-white rounded-xl shadow-sm border border-gray-100 p-8">
+                <form class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                            <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-green-500 focus:ring-1 focus:ring-green-500"/>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-green-500 focus:ring-1 focus:ring-green-500"/>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Project Details</label>
+                        <textarea rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-green-500 focus:ring-1 focus:ring-green-500"></textarea>
+                    </div>
+                    <button type="submit" class="w-full button-gradient text-white py-3 px-6 rounded-xl hover:opacity-90 transition-opacity font-medium">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-50 border-t border-gray-100 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="relative w-10 h-10">
+                            <div class="absolute inset-0 bg-gradient-to-tr from-green-500 to-emerald-400 rounded-xl rotate-6"></div>
+                            <div class="absolute inset-0 bg-gradient-to-bl from-green-400 to-emerald-500 rounded-xl -rotate-6 opacity-70"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span class="text-white font-bold text-lg">PG</span>
+                            </div>
+                        </div>
+                        <span class="text-xl font-bold gradient-text">Planet Green</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Building next-generation digital solutions with cutting-edge technologies.</p>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-900 mb-4">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#services" class="text-gray-600 hover:text-green-600">Services</a></li>
+                        <li><a href="#projects" class="text-gray-600 hover:text-green-600">Projects</a></li>
+                        <li><a href="#contact" class="text-gray-600 hover:text-green-600">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-900 mb-4">Contact</h3>
+                    <ul class="space-y-3">
+                        <li class="text-gray-600">contact@planetgreen.dev</li>
+                        <li class="text-gray-600">+1 (555) 123-4567</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-100">
+                <p class="text-center text-gray-600">&copy; 2025 Planet Green. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
